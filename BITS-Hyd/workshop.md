@@ -1,5 +1,5 @@
 # Production-Grade RAG Chat Systems: Architecture & Deployment
-### A Hands-On Course by AI GuruKul
+### A Hands-On Course by AIGuruKul Foundation
 *Empowering minds to learn, develop and grow together.*
 
 ---
