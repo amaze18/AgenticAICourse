@@ -21,6 +21,7 @@ spec:
       containers:
         - name: rag-api
           image: myrepo/rag-api:v1
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
           env:
@@ -33,7 +34,7 @@ spec:
             - name: VLLM_BASE_URL
               value: http://vllm-service:8000/v1
             - name: VLLM_MODEL_NAME
-              value: Qwen/Qwen3-8B-Instruct
+              value: Qwen/Qwen2.5-0.5B-Instruct
             - name: EMBEDDING_MODEL_NAME
               value: sentence-transformers/all-MiniLM-L6-v2
             - name: TOP_K
