@@ -94,9 +94,15 @@ def main():
         + list(docs_dir.rglob("*.md"))
         + list(docs_dir.rglob("*.html"))
         + list(docs_dir.rglob("*.htm"))
-    )
+        + list(docs_dir.rglob("*.doc"))
+        + list(docs_dir.rglob("*.pdf"))
+        + list(docs_dir.rglob("*.docx"))
+        + list(docs_dir.rglob("*.csv"))
+        + list(docs_dir.rglob("*.xls"))
+        + list(docs_dir.rglob("*.xlsx"))
+        )
     if not files:
-        print(f"No .txt, .md, .html, or .htm files found under {docs_dir}")
+        print(f"No .txt, .md, .html,  .pdf, .doc, .docx, .csv, .xlsx or .htm files found under {docs_dir}")
         return
 
     points = []
