@@ -5,7 +5,7 @@ Flow:
   1. Embed the incoming question with a local sentence-transformers model.
   2. Search Qdrant for the most relevant chunks.
   3. Build a grounded prompt and send it to vLLM's OpenAI-compatible endpoint,
-     which is serving Qwen/Qwen3-8B-Instruct on the GPU node.
+     which is serving Qwen/Qwen2.5-0.5B-Instruct on the GPU node.
   4. Return the answer + the sources used.
 """
 
@@ -23,19 +23,19 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("rag-api")
 
 # --- Configuration (all overridable via env vars / ConfigMap) ---
-QDRANT_HOST = os.getenv("QDRANT_HOST", "qdrant-service")
+QDRANT_HOST = os.getenv("QDRANT_HOST", "localhost")
 QDRANT_PORT = int(os.getenv("QDRANT_PORT", "6333"))
 QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION", "documents")
 
-VLLM_BASE_URL = os.getenv("VLLM_BASE_URL", "http://vllm-service:8000/v1")
-VLLM_MODEL_NAME = os.getenv("VLLM_MODEL_NAME", "Qwen/Qwen3-8B-Instruct")
+VLLM_BASE_URL = os.getenv("VLLM_BASE_URL", "http://localhost:8000/v1")
+VLLM_MODEL_NAME = os.getenv("VLLM_MODEL_NAME", "Qwen/Qwen2.5-0.5B-Instruct")
 
 EMBEDDING_MODEL_NAME = os.getenv("EMBEDDING_MODEL_NAME", "sentence-transformers/all-MiniLM-L6-v2")
 TOP_K = int(os.getenv("TOP_K", "4"))
 MAX_TOKENS = int(os.getenv("MAX_TOKENS", "800"))
 TEMPERATURE = float(os.getenv("TEMPERATURE", "0.2"))
 
-app = FastAPI(title="Qwen3-8B RAG API")
+app = FastAPI(title="Qwen2.5-0.5B RAG API")
 
 # --- Lazy-loaded singletons ---
 _embedder: Optional[SentenceTransformer] = None
